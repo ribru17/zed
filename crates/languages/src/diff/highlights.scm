@@ -22,7 +22,7 @@
 
 (mode) @number
 
-([
+[
   ".."
   "+"
   "++"
@@ -32,7 +32,7 @@
   "--"
   "---"
   "----"
-] @punctuation.special)
+] @punctuation.special
 
 [
   (binary_change)

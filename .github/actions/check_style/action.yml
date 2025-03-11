@@ -7,3 +7,14 @@ runs:
     - name: cargo fmt
       shell: bash -euxo pipefail {0}
       run: cargo fmt --all -- --check
+
+    - name: Download ts_query_ls v1.10.0
+      run: |
+        mkdir -p ./.ts_query_ls
+        curl -L https://github.com/ribru17/ts_query_ls/releases/download/v1.10.0/ts_query_ls-x86_64-unknown-linux-gnu.tar.gz -o ./.ts _query_ls/ts_query_ls.tar.gz
+        tar -xzf ./.ts_query_ls/ts_query_ls.tar.gz -C ./.ts_query_ls
+        chmod +x ./.ts_query_ls/ts_query_ls
+
+    - name: ts_query_ls format check
+      shell: bash -euxo pipefail {0}
+      run: ts_query_ls format ./crates/languages/src --mode check

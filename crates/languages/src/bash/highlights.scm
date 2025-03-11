@@ -33,8 +33,11 @@
 
 (comment) @comment
 
-(function_definition name: (word) @function)
-(command_name (word) @function)
+(function_definition
+  name: (word) @function)
+
+(command_name
+  (word) @function)
 
 [
   (file_descriptor)
@@ -48,7 +51,6 @@
   (process_substitution)
   (expansion)
 ] @embedded
-
 
 [
   "$"
@@ -72,9 +74,7 @@
 
 (test_operator) @keyword.operator
 
-[
-  ";"
-] @punctuation.delimiter
+";" @punctuation.delimiter
 
 [
   "("
@@ -87,6 +87,7 @@
 
 (simple_expansion
   "$" @punctuation.special)
+
 (expansion
   "${" @punctuation.special
   "}" @punctuation.special) @embedded
@@ -95,7 +96,6 @@
   "$(" @punctuation.special
   ")" @punctuation.special)
 
-(
-  (command (_) @constant)
-  (#match? @constant "^-")
-)
+((command
+  (_) @constant)
+  (#match? @constant "^-"))

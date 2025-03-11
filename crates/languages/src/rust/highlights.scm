@@ -1,14 +1,27 @@
 (identifier) @variable
+
 (type_identifier) @type
+
 (primitive_type) @type.builtin
+
 (self) @variable.special
+
 (field_identifier) @property
 
-(trait_item name: (type_identifier) @type.interface)
-(impl_item trait: (type_identifier) @type.interface)
-(abstract_type trait: (type_identifier) @type.interface)
-(dynamic_type trait: (type_identifier) @type.interface)
-(trait_bounds (type_identifier) @type.interface)
+(trait_item
+  name: (type_identifier) @type.interface)
+
+(impl_item
+  trait: (type_identifier) @type.interface)
+
+(abstract_type
+  trait: (type_identifier) @type.interface)
+
+(dynamic_type
+  trait: (type_identifier) @type.interface)
+
+(trait_bounds
+  (type_identifier) @type.interface)
 
 (call_expression
   function: [
@@ -28,8 +41,11 @@
       field: (field_identifier) @function.method)
   ])
 
-(function_item name: (identifier) @function.definition)
-(function_signature_item name: (identifier) @function.definition)
+(function_item
+  name: (identifier) @function.definition)
+
+(function_signature_item
+  name: (identifier) @function.definition)
 
 (macro_invocation
   macro: [
@@ -42,14 +58,13 @@
   name: (identifier) @function.special.definition)
 
 ; Identifier conventions
-
 ; Assume uppercase names are types/enum-constructors
 ((identifier) @type
- (#match? @type "^[A-Z]"))
+  (#match? @type "^[A-Z]"))
 
 ; Assume all-caps names are constants
 ((identifier) @constant
- (#match? @constant "^_*[A-Z][A-Z\\d_]*$"))
+  (#match? @constant "^_*[A-Z][A-Z\\d_]*$"))
 
 [
   "("
@@ -72,9 +87,7 @@
   "::"
 ] @punctuation.delimiter
 
-[
-  "#"
-] @punctuation.special
+"#" @punctuation.special
 
 [
   "as"
@@ -139,8 +152,10 @@
 ] @comment
 
 [
-  (line_comment (doc_comment))
-  (block_comment (doc_comment))
+  (line_comment
+    (doc_comment))
+  (block_comment
+    (doc_comment))
 ] @comment.doc
 
 [
@@ -183,16 +198,30 @@
 ] @operator
 
 ; Avoid highlighting these as operators when used in doc comments.
-(unary_expression "!" @operator)
+(unary_expression
+  "!" @operator)
+
 operator: "/" @operator
 
 (lifetime) @lifetime
 
-(parameter (identifier) @variable.parameter)
+(parameter
+  (identifier) @variable.parameter)
 
-(attribute_item (attribute (identifier) @attribute))
-(inner_attribute_item (attribute (identifier) @attribute))
+(attribute_item
+  (attribute
+    (identifier) @attribute))
+
+(inner_attribute_item
+  (attribute
+    (identifier) @attribute))
+
 ; Match nested snake case identifiers in attribute items.
-(token_tree (identifier) @attribute (#match? @attribute "^[a-z\\d_]*$"))
+(token_tree
+  (identifier) @attribute
+  (#match? @attribute "^[a-z\\d_]*$"))
+
 ; Override the attribute match for paths in scoped identifiers.
-(token_tree (identifier) @variable "::")
+(token_tree
+  (identifier) @variable
+  "::")

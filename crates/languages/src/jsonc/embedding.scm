@@ -9,6 +9,7 @@
   "]" @keep) @collapse
 
 ; Collapse string values (but not keys).
-(pair value: (string
-  "\"" @keep
-  "\"" @keep) @collapse)
+(pair
+  value: (string
+    "\"" @keep
+    "\"" @keep) @collapse)

@@ -1,19 +1,18 @@
 ; Variables
-
 (identifier) @variable
 
 ; Special identifiers
-
 ((identifier) @type
- (#match? @type "^[A-Z]"))
+  (#match? @type "^[A-Z]"))
+
 (type_identifier) @type
+
 (predefined_type) @type.builtin
 
 (import_specifier
   "type"
   name: (identifier) @type
-  alias: (identifier) @type
-)
+  alias: (identifier) @type)
 
 (import_statement
   "type"
@@ -21,27 +20,23 @@
     (named_imports
       (import_specifier
         name: (identifier) @type
-        alias: (identifier) @type
-      )
-    )
-  )
-)
+        alias: (identifier) @type))))
 
 ([
   (identifier)
   (shorthand_property_identifier)
   (shorthand_property_identifier_pattern)
- ] @constant
- (#match? @constant "^_*[A-Z_][A-Z\\d_]*$"))
+] @constant
+  (#match? @constant "^_*[A-Z_][A-Z\\d_]*$"))
 
 ; Properties
-
 (property_identifier) @property
+
 (shorthand_property_identifier) @property
+
 (shorthand_property_identifier_pattern) @property
 
 ; Function and method calls
-
 (call_expression
   function: (identifier) @function)
 
@@ -50,37 +45,51 @@
     property: (property_identifier) @function.method))
 
 ; Function and method definitions
-
 (function_expression
   name: (identifier) @function)
+
 (function_declaration
   name: (identifier) @function)
+
 (method_definition
   name: (property_identifier) @function.method)
+
 (method_definition
-    name: (property_identifier) @constructor
-    (#eq? @constructor "constructor"))
+  name: (property_identifier) @constructor
+  (#eq? @constructor "constructor"))
 
 (pair
   key: (property_identifier) @function.method
-  value: [(function_expression) (arrow_function)])
+  value: [
+    (function_expression)
+    (arrow_function)
+  ])
 
 (assignment_expression
   left: (member_expression
     property: (property_identifier) @function.method)
-  right: [(function_expression) (arrow_function)])
+  right: [
+    (function_expression)
+    (arrow_function)
+  ])
 
 (variable_declarator
   name: (identifier) @function
-  value: [(function_expression) (arrow_function)])
+  value: [
+    (function_expression)
+    (arrow_function)
+  ])
 
 (assignment_expression
   left: (identifier) @function
-  right: [(function_expression) (arrow_function)])
+  right: [
+    (function_expression)
+    (arrow_function)
+  ])
 
 ; Literals
-
 (this) @variable.special
+
 (super) @variable.special
 
 [
@@ -99,8 +108,7 @@
     (undefined)
     (true)
     (false)
-  ] @type.builtin
-)
+  ] @type.builtin)
 
 (comment) @comment
 
@@ -113,11 +121,12 @@
 (escape_sequence) @string.escape
 
 (regex) @string.regex
+
 (regex_flags) @keyword.regex
+
 (number) @number
 
 ; Tokens
-
 [
   "..."
   "-"
@@ -170,8 +179,7 @@
   [
     "?"
     ":"
-  ] @operator
-)
+  ] @operator)
 
 [
   ";"
@@ -189,7 +197,7 @@
   "]"
   "{"
   "}"
-]  @punctuation.bracket
+] @punctuation.bracket
 
 (template_substitution
   "${" @punctuation.special
@@ -203,10 +211,10 @@
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
-(decorator "@" @punctuation.special)
+(decorator
+  "@" @punctuation.special)
 
 ; Keywords
-
 [
   "abstract"
   "as"

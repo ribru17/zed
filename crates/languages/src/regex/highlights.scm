@@ -43,5 +43,6 @@
 (character_class
   [
     "^" @operator
-    (class_range "-" @operator)
+    (class_range
+      "-" @operator)
   ])

@@ -1,12 +1,9 @@
 (function_definition
-    "function"?
-    body: (
-        _
-        "{" @start
-        "}" @end
-    )) @indent
+  "function"?
+  body: (_
+    "{" @start
+    "}" @end)) @indent
 
 (array
-    "(" @start
-    ")" @end
-    ) @indent
+  "(" @start
+  ")" @end) @indent

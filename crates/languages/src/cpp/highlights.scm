@@ -1,10 +1,11 @@
 (identifier) @variable
+
 (field_identifier) @property
+
 (namespace_identifier) @namespace
 
 (concept_definition
-    (identifier) @concept)
-
+  (identifier) @concept)
 
 (call_expression
   function: (qualified_identifier
@@ -61,29 +62,35 @@
 (operator_name
   (identifier)? @operator) @function
 
-(destructor_name (identifier) @function)
+(destructor_name
+  (identifier) @function)
 
 ((namespace_identifier) @type
- (#match? @type "^[A-Z]"))
+  (#match? @type "^[A-Z]"))
 
 (auto) @type
+
 (type_identifier) @type
-type :(primitive_type) @type.primitive
+
+type: (primitive_type) @type.primitive
+
 (sized_type_specifier) @type.primitive
 
 (requires_clause
-    constraint: (template_type
-        name: (type_identifier) @concept))
+  constraint: (template_type
+    name: (type_identifier) @concept))
 
 (attribute
-    name: (identifier) @keyword)
+  name: (identifier) @keyword)
 
 ((identifier) @constant
- (#match? @constant "^_*[A-Z][A-Z\\d_]*$"))
+  (#match? @constant "^_*[A-Z][A-Z\\d_]*$"))
 
 (statement_identifier) @label
+
 (this) @variable.special
-("static_assert") @function.builtin
+
+"static_assert" @function.builtin
 
 [
   "alignas"
@@ -157,7 +164,7 @@ type :(primitive_type) @type.primitive
 
 [
   (null)
-  ("nullptr")
+  "nullptr"
 ] @constant.builtin
 
 (number_literal) @number
@@ -229,5 +236,8 @@ type :(primitive_type) @type.primitive
   "?"
 ] @operator
 
-(conditional_expression ":" @operator)
-(user_defined_literal (literal_suffix) @operator)
+(conditional_expression
+  ":" @operator)
+
+(user_defined_literal
+  (literal_suffix) @operator)
